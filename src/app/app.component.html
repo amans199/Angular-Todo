@@ -1,8 +1,48 @@
-<div class="container">
-  <h1>
+<div class="container my-5">
+  <h1 class="text-center mb-4">
     Angular-Todo App Created with &#x1F5A4; by
     <a href="https://www.linkedin.com/in/amans199/" target="_blank" rel="noopener">Ahmed Mansour</a>
   </h1>
-</div>
 
+  <div class="card text-center">
+    <div class="card-header">
+      <span *ngIf="todos.length> 0"> You still have {{todos.length}} todo</span>
+      <span *ngIf="todos.length==0">You don't have anything to do Sir</span>
+    </div>
+    <div class="card-body">
+      <div class="actions">
+        <button class="btn btn-primary" (click)="hideAllDone()" *ngIf="todos.length > 0 && HideDoneTodos === false">Hide
+          All Done</button>
+        <button class="btn btn-primary" (click)="showAllDone()" *ngIf="todos.length > 0 && HideDoneTodos === true">Show
+          All Done</button>
+      </div>
+      <ul class="list px-0 mb-0" #todo__list>
+        <li #todo__item *ngFor="let todo of todos" (click)="toggleCheck(todo.id)"
+          [className]="todo.done &&  todo.pinned !== true ? ' todoDone list__item p-2 justify-content-between align-items-center' : ' list__item p-2 justify-content-between align-items-center '">
+          {{todo.label}}
+          <input type="checkbox" [checked]="todo.done===true" class="d-flex  align-items-center"
+            *ngIf="todo.pinned !== true">
+        </li>
+        <span *ngIf="todos.length==0">
+          Start adding some todo notes below
+        </span>
+      </ul>
+
+    </div>
+    <div class="card-footer text-muted text-center">
+      <div class="form-group">
+        <label for="input-todo">Add New Todo</label>
+        <input type="text" class="form-control" id="input-todo" placeholder="Enter Todo note" #newTodo>
+      </div>
+      <div class="row d-flex align-items-center">
+        <div class="form-check col-6">
+          <input type="checkbox" class="form-check-input" id="submit-todo" #pinNewTodo>
+          <label class="form-check-label" for="submit-todo">pin this note</label>
+        </div>
+        <button class="btn btn-primary col-6"
+          (click)="addTodo(newTodo.value,pinNewTodo.checked);newTodo.value='';pinNewTodo.checked=false">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>

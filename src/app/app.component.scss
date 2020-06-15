@@ -1,0 +1,26 @@
+* {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    font-family: "Roboto", sans-serif;
+}
+
+li {
+    display: flex;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+li.todoDone {
+    text-decoration: line-through;
+    opacity: 0.7;
+    font-style: italic;
+    color: gray;
+}
